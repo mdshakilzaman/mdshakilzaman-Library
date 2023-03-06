@@ -32,7 +32,7 @@ public class BookDAO {
         List<Book> books = new ArrayList<>();
         try {
             //Write SQL logic here
-            String sql = "change me";
+            String sql = "SELECT * FROM Book;"; //changed here
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -57,10 +57,11 @@ public class BookDAO {
         Connection connection = ConnectionUtil.getConnection();
         try {
             //Write SQL logic here
-            String sql = "change me";
+            String sql = "SELECT * FROM Book WHERE isbn = ?;"; //changed here
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            //write preparedStatement's setInt method here.
+            //write preparedStatement's setInt method here..
+            preparedStatement.setInt(1, isbn); //changed here
 
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -87,10 +88,14 @@ public class BookDAO {
         Connection connection = ConnectionUtil.getConnection();
         try {
             //Write SQL logic here
-            String sql = "change me" ;
+            String sql = "INSERT INTO Book (isbn, author_id, title, copies_available) VALUES (?, ?, ?, ?);" ; //changed here
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             //write preparedStatement's setString and setInt methods here.
+            preparedStatement.setInt(1, book.getIsbn()); //changed here
+            preparedStatement.setInt(2, book.getAuthor_id()); //changed here
+            preparedStatement.setString(3, book.getTitle()); //changed here
+            preparedStatement.setInt(4, book.getCopies_available()); //changed here
 
             preparedStatement.executeUpdate();
             return book;
@@ -109,10 +114,11 @@ public class BookDAO {
         List<Book> books = new ArrayList<>();
         try {
             //Write SQL logic here
-            String sql = "change me";
+            String sql = "SELECT * FROM Book WHERE copies_available > ?"; //changed here
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             //write preparedStatement's setInt method here.
+            preparedStatement.setInt(1, 0); //changed here
 
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
